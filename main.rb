@@ -7,7 +7,8 @@ require './alien'
 require './alien_collection'
 require './alien_scraper'
 
-@log = Logger.new("log/#{Time.now.to_i}_aliens.log")
+@timestamp = Time.now.to_i
+@log = Logger.new("log/#{@timestamp}_aliens.log")
 
 begin
   collection = AlienCollection.new
@@ -16,5 +17,5 @@ begin
 rescue Interrupt
 
 ensure
-  File.open("./out/#{Time.now.to_i}_aliens.csv", "w") { |f| f.write(collection.to_csv) }
+  File.open("./out/#{@timestamp}_aliens.csv", "w") { |f| f.write(collection.to_csv) }
 end
