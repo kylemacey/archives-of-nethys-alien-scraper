@@ -15,7 +15,7 @@ class AlienScraper
           collection.add(alien)
         end
       rescue => e
-        puts "INDEX_ERROR: #{e.message}"
+        @log.error(e)
         next
       end
     end.compact
