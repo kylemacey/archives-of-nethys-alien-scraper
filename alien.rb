@@ -5,41 +5,29 @@ class Alien
   ]
   attr_accessor *ATTRIBUTE_KEYS
 
-  def self.num_attr(key)
-    define_method("#{key}=") do |val|
-      if val.is_a?(String)
-        instance_variable_set("@#{key}", val.to_i)
+  def self.num_attr(*keys)
+    keys.each do |key|
+      define_method("#{key}=") do |val|
+        if val.is_a?(String)
+          instance_variable_set("@#{key}", val.to_i)
+        end
       end
     end
   end
 
-  def self.array_attr(key)
-    define_method("#{key}=") do |val|
-      if val.is_a?(String)
-        instance_variable_set("@#{key}", val.split(", ").map(&:strip))
+  def self.array_attr(*keys)
+    keys.each do |key|
+      define_method("#{key}=") do |val|
+        if val.is_a?(String)
+          instance_variable_set("@#{key}", val.split(", ").map(&:strip))
+        end
       end
     end
   end
 
-  num_attr :cr
-  num_attr :init
-  num_attr :perception
-  num_attr :hp
-  num_attr :eac
-  num_attr :kac
-  num_attr :fort
-  num_attr :ref
-  num_attr :will
-  num_attr :sr
-  num_attr :str
-  num_attr :dex
-  num_attr :con
-  num_attr :int
-  num_attr :wis
-  num_attr :cha
+  num_attr *%[cr init perception hp eac kac fort ref will sr str dex con int wis cha]
 
-  array_attr :senses
-  array_attr :immunities
+  array_attr :senses, :immunities
 
   # convert "XP 1,200" to 1200
   def xp=(val)
