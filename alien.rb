@@ -29,6 +29,10 @@ class Alien
 
   array_attr :senses, :immunities
 
+  def url=(val)
+    @url = Addressable::URI.encode(val)
+  end
+
   # convert "XP 1,200" to 1200
   def xp=(val)
     if val.is_a?(String)

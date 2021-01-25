@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'addressable'
 require 'open-uri'
 require 'pry'
 require 'logger'
